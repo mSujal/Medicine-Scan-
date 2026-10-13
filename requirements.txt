@@ -1,0 +1,13 @@
+numpy
+pandas
+pyyaml
+rapidfuzz
+pillow
+opencv-python-headless
+pytest
+tensorflow
+pytesseract
+fastapi
+uvicorn
+python-multipart
+streamlit

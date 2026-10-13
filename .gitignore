@@ -1,0 +1,25 @@
+# environment files
+.venv/
+
+# python
+__pycache__/ 
+.pytest_cache/ 
+*.pyc 
+
+# Notebooks 
+.ipynb_checkpoints/
+
+# Editors
+.vscode/
+.idea/
+
+# Model files 
+*.h5 
+*.keras
+*.tflite 
+*.npz 
+
+# Secrets
+.env 
+
+
