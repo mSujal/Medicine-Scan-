@@ -1,0 +1,21 @@
+ingredient,strength,category,aliases
+paracetamol,500 mg,fever,paracetamol|acetaminophen
+paracetamol,125 mg/5 ml,fever,paracetamol|acetaminophen
+paracetamol,100 mg/ml,fever,paracetamol|acetaminophen
+ibuprofen,200 mg,fever,ibuprofen
+ibuprofen,400 mg,fever,ibuprofen
+ibuprofen,200 mg/5 ml,fever,ibuprofen
+aspirin,500 mg,fever,aspirin|acetylsalicylic acid
+oxymetazoline,0.025 %,cold,oxymetazoline
+oxymetazoline,0.05 %,cold,oxymetazoline
+pheniramine,25 mg,cold,pheniramine
+pheniramine,50 mg,cold,pheniramine
+levocetirizine,5 mg,allergy,levocetirizine|levocetrizine
+fexofenadine,30 mg/5 ml,allergy,fexofenadine
+omeprazole,20 mg,gastric,omeprazole
+domperidone,10 mg,gastric,domperidone
+ondansetron,2 mg,gastric,ondansetron
+ondansetron,4 mg,gastric,ondansetron
+metoclopramide,10 mg,gastric,metoclopramide
+hyoscine butylbromide,10 mg,gastric,hyoscine butylbromide
+hyoscine butylbromide,20 mg,gastric,hyoscine butylbromide

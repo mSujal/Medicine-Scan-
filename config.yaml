@@ -1,0 +1,37 @@
+ocr: 
+  engine: tesseract
+  languages: [eng]    
+  psm: 11
+
+
+preprocess: 
+  clahe: true
+  clip_limit: 2.5
+  deskew: true
+  denoise: false
+
+
+embedder: 
+  name: mobilenetv2
+  input_size: 224
+
+
+fusion: 
+  w_text: 0.7
+  w_img: 0.3
+
+
+decision: 
+  min_score: 0.5      # placeholder, to be calibrated on validation set 
+  min_margin: 0.1
+
+
+matcher: 
+  min_ratio: 85
+  min_len: 4
+  max_ngram: 3
+
+
+paths: 
+  reference_db: data/reference_db.csv
+  index: data/index.npz

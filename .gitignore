@@ -22,4 +22,5 @@ __pycache__/
 # Secrets
 .env 
 
-
+# Raw photos
+data/raw/
