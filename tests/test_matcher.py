@@ -7,6 +7,8 @@ REF = {
     "ibuprofen": ["ibuprofen"],
     "hyoscine butylbromide": ["hyoscine butylbromide"],
     "domperidone": ["domperidone"],
+    "ondansetron": ["ondansetron"],
+    "fexofenadine": ["fexofenadine"],
 }
 REAL_DB = Path(__file__).resolve().parents[1] / "data" / "reference_db.csv"
 
@@ -36,9 +38,10 @@ def test_alias_matches_ingredient():
     assert "paracetamol" in scores
 
 
-def test_truncated_name_resolves_to_ingredient():
-    scores = text_scores("parace 500 mg", REF)
-    assert scores.get("paracetamol", 0) >= 0.85
+def test_truncated_name_resolves_but_scores_below_exact():
+    trunc = text_scores("parace 500 mg", REF)["paracetamol"]
+    exact = text_scores("paracetamol 500 mg", REF)["paracetamol"]
+    assert 0.8 <= trunc < exact == 1.0
 
 
 def test_ocr_digit_confusion_is_repaired():
@@ -69,3 +72,12 @@ def test_real_reference_db_loads_and_matches():
     assert "acetaminophen" in index["paracetamol"]
     scores = text_scores("parace 500 mg", index)
     assert "paracetamol" in scores
+
+
+def test_no_false_positive_on_back_boilerplate():
+    assert text_scores("Iron OXide Red and Titanium Dioxide, store in dry place", REF) == {} 
+
+
+def test_longer_name_does_not_trigger_similar_ingredient():
+    scores = text_scores("Fexofenadine Hydrochloride USP 180 mg", REF)
+    assert list(scores) == ["fexofenadine"]

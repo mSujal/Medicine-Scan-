@@ -34,11 +34,23 @@ def _ngrams(tokens: list[str], max_n: int):
             yield " ".join(tokens[i:i + n])
 
 
-def text_scores(text: str, ref_db: dict[str, list[str]], min_ratio: int = 85, min_len: int = 4, max_ngram: int = 3):
+def _score(gram: str, name: str):
+    """Whole string similarity (0...1). Truncated prefix socre 0.8-0.9 and exact reads 1.0"""
+    g = gram.replace(" ", "")
+    n = name.replace(" ", "")
+    best = fuzz.ratio(g, n) / 100 
+    if 5 <= len(g) < len(n):
+        coverage = len(g) / len(n)
+        if coverage >= 0.5 and fuzz.ratio(g, n[:len(g)]) >= 90:
+            best = max(best, 0.7 + 0.2 * coverage)
+
+    return best 
+
+
+def text_scores(text: str, ref_db: dict[str, list[str]], min_ratio: int = 80, min_len: int = 4, max_ngram: int = 3):
     """
-    ref_db maps ingredient -> list of names (ingredient + aliases, lowercases)
-    Each ingredient gets best partial match score across all ngrams
-    Ingredients with no match above min_ratio are omitted
+    Best whole-string match per ingredient
+    Score below min_ratio / 100 are to be dropped
     """
     tokens = _tokens(text)
     scores: dict[str, float] = {} 
@@ -48,9 +60,9 @@ def text_scores(text: str, ref_db: dict[str, list[str]], min_ratio: int = 85, mi
             if len(gram) < min_len:
                 continue 
             for name in names:
-                ratio = fuzz.partial_ratio(gram, name)
-                if ratio >= min_ratio:
-                    best = max(best, ratio / 100)
+                s = _score(gram, name) 
+                if s * 100 >= min_ratio: 
+                    best = max(best, s)
         if best > 0:
             scores[ingredient] = best  
 

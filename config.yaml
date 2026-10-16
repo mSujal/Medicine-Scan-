@@ -5,9 +5,11 @@ ocr:
 
 
 preprocess: 
-  clahe: true
+  clahe: false 
   clip_limit: 2.5
-  deskew: true
+  upscale: true 
+  min_long_side: 1600   # upscale smaller images before OCR 
+  deskew: true      
   denoise: false
 
 
@@ -27,7 +29,7 @@ decision:
 
 
 matcher: 
-  min_ratio: 85
+  min_ratio: 80
   min_len: 4
   max_ngram: 3
 
