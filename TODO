@@ -1,0 +1,4 @@
+1. The image are high res and thus can be slow and might consume RAM so need to descale.
+2. Need to check different image sharpening and constrast levels and affects in the readabililty.
+3. Only have clean images need to augment, collect actual damages foils and as last resort synthetically get the damage. 
+
